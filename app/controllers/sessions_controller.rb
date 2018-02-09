@@ -1,8 +1,12 @@
 class SessionsController < ApplicationController
+  
   def new
+    # 対応する Model が無いので、コードの追加は無しです。
   end
 
   def create
+    
+
     email = params[:session][:email].downcase
     password = params[:session][:password]
     if login(email, password)
@@ -24,6 +28,8 @@ class SessionsController < ApplicationController
 
   def login(email, password)
     @user = User.find_by(email: email)
+    
+    # &&,	例a && b,	aとbが共に真の場合に真
     if @user && @user.authenticate(password)
       # ログイン成功
       session[:user_id] = @user.id
