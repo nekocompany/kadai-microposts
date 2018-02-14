@@ -1,5 +1,6 @@
 <ul class="media-list">
   <% microposts.each do |micropost| %>
+    <% #indexのrender 'microposts/microposts', microposts: @microposts %>
     <% user = micropost.user %>
     <li class="media">
       <div class="media-left">

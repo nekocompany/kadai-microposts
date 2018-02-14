@@ -1,10 +1,12 @@
-class UsersController < ApplicationController
-  
-  before_action :require_user_logged_in, only: [:index, :show]
-  
-  protect_from_forgery with: :exception
 
-  include SessionsHelper
+
+
+class UsersController < ApplicationController
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+
+  # protect_from_forgery with: :exception
+  # include SessionsHelper
+  # が消えているが…
   
   def index
     @users = User.all.page(params[:page])
@@ -31,18 +33,22 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
+  end
   
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.page(params[:page])
+    counts(@user)
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-  
-  def require_user_logged_in
-    unless logged_in?
-      redirect_to login_url
-    end
-  end
-  
-  
 end
