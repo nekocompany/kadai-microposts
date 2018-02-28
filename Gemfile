@@ -59,7 +59,7 @@ gem 'pry-byebug', group: :development
 # heroku対応
 group :production do
   gem 'pg', '0.21.0'
+  
 end
 
 
-ruby '2.3.4'
