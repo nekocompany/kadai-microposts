@@ -1,4 +1,6 @@
 <% if logged_in? %>
+<h1><%= current_user.name %>のホーム画面</h1>
+
   <div class="row">
     <aside class="col-md-4">
       <%= form_for(@micropost) do |f| %>
@@ -9,8 +11,14 @@
       <% end %>
     </aside>
     <div class="col-xs-8">
-      <%= render 'microposts/microposts', microposts: @microposts %>
+      
+      <%# 投稿一覧表示 %>
+      <%= render 'microposts/microposts', microposts: @microposts, favd_id: nil %>
+      
     </div>
+    
+    
+    
   </div>
 <% else %>
   <div class="center jumbotron">

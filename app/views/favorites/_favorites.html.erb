@@ -1,22 +1,25 @@
 <ul class="media-list">
-  <% microposts.each do |micropost| %>
-    <% #indexのrender 'microposts/microposts', microposts: @microposts %>
-    <% user = micropost.user %>
+  <% favd_favorites.each do |favd_favorite| %>
+  
+  
+  
+    <%# indexのrender 'favorites/favorites', favd_favorites: @favd_favoreites,　%>
+    <% user = favd_favorite.user %>
     <li class="media">
       <div class="media-left">
         <img class="media-object img-rounded" src="<%= gravatar_url(user, options = { size: 50 }) %>" alt="">
       </div>
       <div class="media-body">
         <div>
-          <%= link_to user.name, user_path(user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
+          <%= link_to user.name, user_path(user) %> <span class="text-muted">posted at <%= favd_favorite.created_at %></span>
         </div>
         <div>
-          <p><%= micropost.content %></p>
+          <p><%= favd_favorite.content %></p>
         </div>
         <div class="btn-toolbar" >
           <div class="btn-group">
-          <% if current_user == micropost.user %>
-            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% if current_user == favd_favorite.user %>
+            <%= link_to "Delete", favd_favorite, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
           </div>
           
@@ -28,7 +31,7 @@
         <%# @micropost を micropostとしてボタン表示に渡せていない！%>
         <% hoge = 'hoge' %>
         <%# favd_user: favd_user,  %>
-          <%= render 'favorites/fav_button', { micropost: micropost, favd_id: favd_id} %> 
+          <%= render 'favorites/fav_button', { micropost: favd_favorite, favd_id: favd_id} %> 
           <%# 前段としてmicropost.idを表示%>
           <%# micropost.id = <%= micropost.id %>
           <%# この表現でidはusers/idでもindexでも問題なく表示される %>
@@ -40,5 +43,6 @@
       </div>
     </li>
   <% end %>
-  <%= paginate microposts %>
+  <%= params%>
+  <%= paginate favd_favorites %>
 </ul>
